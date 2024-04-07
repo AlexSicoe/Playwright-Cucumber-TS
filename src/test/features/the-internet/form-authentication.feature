@@ -1,7 +1,7 @@
 @only
-Feature: Heroku Form Authentication Test
+Feature: Form Authentication
     As a user
-    I want to test the form authentication on the Herokuapp
+    I want to test the form authentication on the-internet app
     So that I can verify the login functionality
 
   Scenario Outline: Test form login

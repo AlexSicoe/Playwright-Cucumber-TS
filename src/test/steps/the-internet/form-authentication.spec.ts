@@ -1,5 +1,5 @@
 import { Given, When, Then, setDefaultTimeout } from "@cucumber/cucumber";
-import { IFixture } from "../../hooks/FixtureManager";
+import { IFixture } from "../../../hooks/FixtureManager";
 import { expect } from "@playwright/test";
 import * as ms from 'ms';
 setDefaultTimeout(ms('2 minutes'))
