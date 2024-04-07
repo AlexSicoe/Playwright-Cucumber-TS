@@ -4,11 +4,11 @@
   "description": "Playwright Cucumber TS framework - The easiest way to learn",
   "main": "index.js",
   "scripts": {
-    "debug": "cross-env ENV=prod PWDEBUG=1 DEBUG=pw:api cucumber-js -p debug --config=config/cucumber.js",
+    "debug": "cross-env ENV=heroku PWDEBUG=1 DEBUG=pw:api cucumber-js -p debug --config=config/cucumber.js",
     "pretest": "npx ts-node src/helper/report/init.ts",
-    "test": "cross-env ENV=prod FORCE_COLOR=0 cucumber-js --config=config/cucumber.js || true",
+    "test": "cross-env ENV=heroku FORCE_COLOR=0 cucumber-js --config=config/cucumber.js || true",
     "posttest": "npx ts-node src/helper/report/report.ts",
-    "test:failed": "cross-env ENV=prod cucumber-js -p rerun --config=config/cucumber.js @rerun.txt",
+    "test:failed": "cross-env ENV=heroku cucumber-js -p rerun --config=config/cucumber.js @rerun.txt",
     "test:only": "npm run test --tags='@only'",
     "test:ignore": "npm run test --tags='not @ignore'",
     "open:report": "npx ts-node src/helper/report/report-server.ts"

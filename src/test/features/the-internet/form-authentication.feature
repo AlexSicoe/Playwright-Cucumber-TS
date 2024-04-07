@@ -1,11 +1,11 @@
-@only
+@only @disable:video
 Feature: Form Authentication
     As a user
     I want to test the form authentication on the-internet app
     So that I can verify the login functionality
 
   Scenario Outline: Test form login
-    Given I am on the login page
+    Given I am on the "/login" page
     When I enter username "<username>"
     And I enter password "<password>"
     And I click on the login button
