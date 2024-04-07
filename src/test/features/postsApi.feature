@@ -1,4 +1,4 @@
-@disable:video @disable:screenshot @api @only
+@disable:video @disable:screenshot @api
 Feature: Posts API
 
   Scenario: Retrieve all posts

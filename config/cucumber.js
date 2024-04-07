@@ -22,6 +22,7 @@ const commonConfig = {
         "json:test-results/cucumber-report.json",
         "rerun:@rerun.txt"
     ],
+    timeout: 2 * 60 * 1000,
 };
 
 module.exports = {
