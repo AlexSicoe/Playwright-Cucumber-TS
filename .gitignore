@@ -8,3 +8,5 @@ cucumber-report.html
 assets
 @rerun.txt
 index.html
+browser-details.json
+.DS_Store
