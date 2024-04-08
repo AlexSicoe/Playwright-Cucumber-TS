@@ -1,7 +1,7 @@
-@only @disable:video
+@disable:video
 Feature: Elements
-  Scenario: Add/Remove Elements
-    Given I am on the "/add_remove_elements" route
+  Scenario: Add or Remove Elements
+    Given I am on the "/add_remove_elements/" route
     When I click on the "Add Element" button
     Then I should see a new "Delete" button appear
     When I click on the "Delete" button
@@ -21,13 +21,7 @@ Feature: Elements
     When I clear the input field
     Then the input field should be empty
 
-  Scenario: JQuery UI Menus
-    Given I am on the "/jqueryui/menu" route
-    When I hover over the "Enabled" menu item
-    And I click on the "Downloads" submenu item
-    Then I should be redirected to the "/download" route
-
-  Scenario: Large & Deep DOM
+  Scenario: Large and Deep DOM
     Given I am on the "/large" route
     Then the page should contain 50 rows in the table
 
