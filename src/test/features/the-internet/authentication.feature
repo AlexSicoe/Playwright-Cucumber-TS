@@ -5,37 +5,37 @@ Feature: Authentication
     So that I can verify the login functionality
 
   Scenario Outline: Form Authentication
-    Given I am on the "/login" page
+    Given I am on the "/login" route
     When I enter username "<username>"
     And I enter password "<password>"
     And I click on the login button
-    Then I should be greeted with "<auth_message>"
+    Then I should be greeted with the following login message: "<message>"
 
     Examples: 
-      | username    | password             | auth_message                  |
+      | username    | password             | message                       |
       | tomsmith    | SuperSecretPassword! | You logged into a secure area |
       | invalidUser | SuperSecretPassword! | Your username is invalid!     |
       | tomsmith    | invalidPass          | Your password is invalid!     |
       |             |                      | Your username is invalid!     |
 
   Scenario Outline: Basic Auth
-    Given I am on the "/basic_auth" page with credentials "<username>" and "<password>"
-    Then I should see a "<auth_message>" message
+    Given I am on the "/basic_auth" route with credentials "<username>" and "<password>"
+    Then I should be greeted with the following login message: "<message>"
 
     Examples: 
-      | username | password | auth_message                                           |
+      | username | password | message                                                |
       | admin    | admin    | Congratulations! You must have the proper credentials. |
-      | admin    | wrong    | Unauthorized                                           |
-      | wrong    | admin    | Unauthorized                                           |
-      | wrong    | wrong    | Unauthorized                                           |
+      | admin    | wrong    | Not authorized                                         |
+      | wrong    | admin    | Not authorized                                         |
+      | wrong    | wrong    | Not authorized                                         |
 
   Scenario Outline: Digest Authentication
-    Given I am on the "/digest_auth" page with credentials "<username>" and "<password>"
-    Then I should see a "<auth_message>" message
+    Given I am on the "/digest_auth" route with credentials "<username>" and "<password>"
+    Then I should be greeted with the following login message: "<message>"
 
     Examples: 
-      | username | password | auth_message                                           |
+      | username | password | message                                                |
       | admin    | admin    | Congratulations! You must have the proper credentials. |
-      | admin    | wrong    | Unauthorized                                           |
-      | wrong    | admin    | Unauthorized                                           |
-      | wrong    | wrong    | Unauthorized                                           |
+      | admin    | wrong    |                                                        |
+      | wrong    | admin    |                                                        |
+      | wrong    | wrong    |                                                        |

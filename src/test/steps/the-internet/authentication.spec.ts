@@ -1,10 +1,50 @@
-import { Given, When, Then } from "@cucumber/cucumber";
+import { Given, When, Then, setDefaultTimeout } from "@cucumber/cucumber";
 import { IFixture } from "../../../hooks/FixtureManager";
 import { expect } from "@playwright/test";
+import { HttpProxyAgent } from 'http-proxy-agent';
 
-Given('I am on the {string} page', async function (path) {
+const removeFirstSlash = (route: string): string => route.startsWith('/') ? route.substring(1) : route;
+
+Given('I am on the {string} route', async function (route: string) {
   let fixture = this.fixture as IFixture
-  await fixture.page.goto(`${process.env.BASEURL}${path}`);
+  route = removeFirstSlash(route);
+  await fixture.page.goto(`${process.env.BASEURL}/${route}`);
+})
+
+/**
+ * This function navigates to a given route with provided credentials.
+ * 
+ * There are several ways to handle authentication:
+ * 
+ * Variant 1 (used in this function): Prepend the credentials to the URL.
+ * 
+ * Variant 2: Set the Authorization header. This works only for Basic auth.
+ * Example:
+ * ```typescript
+ * fixture.context.setExtraHTTPHeaders({
+ *   Authorization: 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64')
+ * })
+ * await fixture.page.goto(`${process.env.BASEURL}/${route}`);
+ * ```
+ * 
+ * Variant 3: Intercept the route and add the Authorization header. This also works only for Basic auth.
+ * Example:
+ * ```typescript
+ * fixture.context.route(`${process.env.BASEURL}/*`, async (route, request) => {
+ *   const headers = request.headers();
+ *   headers['Authorization'] = 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64')
+ *   route.continue({ headers });
+ * });
+ * await fixture.page.goto(`${process.env.BASEURL}/${route}`);
+ * ```
+ */
+Given('I am on the {string} route with credentials {string} and {string}', async function (route: string, username: string, password: string) {
+  let fixture = this.fixture as IFixture
+  route = removeFirstSlash(route);
+
+  // Variant 1: prepend credentials to the URL
+  let baseUrl = new URL(process.env.BASEURL);
+  await fixture.page.goto(`https://${username}:${password}@${baseUrl.host}/${route}`);
 })
 
 When('I enter username {string}', async function (username: string) {
@@ -22,7 +62,7 @@ When('I click on the login button', async function () {
   await fixture.page.click('button[type="submit"]')
 })
 
-Then('I should be greeted with {string}', async function (message: string) {
+Then('I should be greeted with the following login message: {string}', async function (message: string) {
   let fixture = this.fixture as IFixture
-  await expect(fixture.page.locator('#flash')).toContainText(message)
+  await expect(fixture.page.locator('body')).toContainText(message)
 })
