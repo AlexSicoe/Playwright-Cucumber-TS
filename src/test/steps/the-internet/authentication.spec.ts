@@ -1,4 +1,4 @@
-import { Given, When, Then, setDefaultTimeout } from "@cucumber/cucumber";
+import { Given, When, Then, setDefaultTimeout, DataTable } from "@cucumber/cucumber";
 import { IFixture } from "../../../hooks/FixtureManager";
 import { expect } from "@playwright/test";
 import { removeFirstSlash } from "./common.spec";
@@ -21,7 +21,16 @@ When('I click on the login button', async function () {
 Then('I should be greeted with the following login message: {string}', async function (message: string) {
   let fixture = this.fixture as IFixture
   await expect(fixture.page.locator('body')).toContainText(message)
+  // const messageElement = await fixture.page.locator('#flash');
+
 })
+
+Then('I should be greeted with the following message:', async function (dataTable: DataTable) {
+  let fixture = this.fixture as IFixture
+  const expectedMessage = dataTable.hashes()[0].message;
+  const messageElement = await fixture.page.locator('#flash');
+  await expect(messageElement).toContainText(expectedMessage)
+});
 
 /**
  * This function navigates to a given route with provided credentials.

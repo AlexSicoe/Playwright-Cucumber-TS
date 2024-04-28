@@ -29,7 +29,7 @@ module.exports = {
     default: {
         ...commonConfig,
         tags: tags,
-        parallel: 2,
+        parallel: 12,
     },
     debug: {
         ...commonConfig,

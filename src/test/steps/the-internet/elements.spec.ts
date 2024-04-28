@@ -4,8 +4,28 @@ import { IFixture } from '../../../hooks/FixtureManager';
 
 When('I click on the {string} button', async function (buttonText: string) {
   const { page } = this.fixture as IFixture;
-  // await page.click(`button:has-text("${buttonText}")`);
   await page.getByRole('button', { name: buttonText }).click();
+});
+
+When('I click on the first {string} button', async function (buttonText: string) {
+  const { page } = this.fixture as IFixture;
+  await page.getByRole('button', { name: buttonText }).first().click();
+});
+
+When('I click on the {string} button {int} times', async function (buttonText: string, count: number) {
+  const { page } = this.fixture as IFixture;
+
+  for (let i = 0; i < count; i++) {
+    // await page.click(`button:has-text("${buttonText}")`);
+    await page.getByRole('button', { name: buttonText }).click();
+  }
+});
+
+Then('I should see {int} {string} buttons', async function (count, buttonText) {
+  const { page } = this.fixture as IFixture;
+  const buttons = await page.getByRole('button', { name: buttonText })
+  const actualCount = await buttons.count();
+  expect(actualCount).toBe(count);
 });
 
 Then('I should see a new {string} button appear', async function (buttonText: string) {

@@ -10,4 +10,13 @@ Given('I am on the {string} route', async function (route: string) {
   await fixture.page.goto(`${process.env.BASEURL}/${route}`);
 })
 
+When('I click on the {string} link', async function (linkText: string) {
+  const { page } = this.fixture as IFixture;
+  await page.click(`a:has-text("${linkText}")`);
+  // await page.getByRole('link', { name: linkText }).click()
+});
 
+Given('I am on the homepage', async function () {
+  const { page } = this.fixture as IFixture;
+  await page.goto(process.env.BASEURL);
+});

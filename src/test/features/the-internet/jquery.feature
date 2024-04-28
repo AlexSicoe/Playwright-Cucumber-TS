@@ -1,4 +1,4 @@
-@disable:vide @only
+@disable:video
 Feature: JQuery UI Menus
 
   Background: 

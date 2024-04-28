@@ -55,9 +55,3 @@ Then('I should be redirected to the {string} route', async function (route: stri
   const { page } = this.fixture as IFixture;
   await expect(page).toHaveURL(`${process.env.BASEURL}${route}`);
 });
-
-When('I click on the {string} link', async function (linkText: string) {
-  const { page } = this.fixture as IFixture;
-  await page.click(`a:has-text("${linkText}")`);
-  // await page.getByRole('link', { name: linkText }).click()
-});
