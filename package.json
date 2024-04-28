@@ -10,6 +10,10 @@
     "posttest": "npx ts-node src/helper/report/report.ts",
     "test:failed": "cross-env ENV=heroku cucumber-js -p rerun --config=config/cucumber.js @rerun.txt",
     "test:only": "npm run test --tags='@only'",
+    "test:clientA": "npm run test --tags='@client:A or not @client:B'",
+    "test:clientB": "npm run test --tags='@client:B or not @client:A'",
+    "test:only:clientA": "npm run test --tags='@only and (@client:A or not @client:B)'",
+    "test:only:clientB": "npm run test --tags='@only and (@client:B or not @client:A)'",
     "test:ignore": "npm run test --tags='not @ignore'",
     "open:report": "npx ts-node src/helper/report/report-server.ts"
   },

@@ -1,4 +1,3 @@
-@only
 Feature: The Internet Herokuapp Tests
 
   Background:
