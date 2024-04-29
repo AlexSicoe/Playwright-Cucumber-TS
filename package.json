@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "debug": "cross-env ENV=heroku PWDEBUG=1 DEBUG=pw:api cucumber-js --profile debug --config=config/cucumber.js",
+    "debug:failed": "cross-env ENV=heroku PWDEBUG=1 DEBUG=pw:api cucumber-js --profile debug:rerun --config=config/cucumber.js",
     "pretest": "npx ts-node src/helper/report/init.ts",
-    "test": "cross-env ENV=heroku FORCE_COLOR=0 cucumber-js --profile only:client:A --config=config/cucumber.js || true",
+    "test": "cross-env ENV=heroku FORCE_COLOR=0 cucumber-js --profile focus:client:A --config=config/cucumber.js || true",
     "posttest": "npx ts-node src/helper/report/report.ts",
     "test:failed": "cross-env ENV=heroku cucumber-js --profile rerun --config=config/cucumber.js @rerun.txt || true && npm run posttest",
     "open:report": "cross-env ENV=heroku npx ts-node src/helper/report/report-server.ts"

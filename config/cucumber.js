@@ -38,9 +38,9 @@ module.exports = {
         ...commonConfig,
         tags: tags,
     },
-    only: {
+    focus: {
         ...commonConfig,
-        tags: `${tags ? `@only and (${tags})` : '@only'}`
+        tags: `${tags ? `@focus and (${tags})` : '@focus'}`
     },
     debug: {
         ...commonConfig,
@@ -50,6 +50,11 @@ module.exports = {
     rerun: {
         ...commonConfig,
         paths: [],
+    },
+    "debug:rerun": {
+        ...commonConfig,
+        paths: [],
+        parallel: 1,
     },
     ...createClientProfiles(commonConfig, tags)
 }
@@ -74,17 +79,17 @@ function createClientProfiles(commonConfig, tags) {
 
         clientProfiles[`client:${client}`] = {
             ...commonConfig,
-            tags: `not @skip and (${clientTags})`
+            tags: `not @ignore and (${clientTags})`
         };
 
-        clientProfiles[`only:client:${client}`] = {
+        clientProfiles[`focus:client:${client}`] = {
             ...commonConfig,
-            tags: `@only and (not @skip and (${clientTags}))`
+            tags: `@focus and (not @ignore and (${clientTags}))`
         };
 
         clientProfiles[`debug:client:${client}`] = {
             ...commonConfig,
-            tags: `@debug and (not @skip and (${clientTags}))`
+            tags: `@debug and (not @ignore and (${clientTags}))`
         };
     }
 

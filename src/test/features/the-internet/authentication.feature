@@ -1,4 +1,4 @@
-@disable:video @only
+@disable:video @focus
 Feature: Authentication
     As a user
     I want to test the authentication methods on the-internet app
