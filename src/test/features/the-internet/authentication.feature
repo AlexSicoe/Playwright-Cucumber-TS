@@ -11,18 +11,22 @@ Feature: Authentication
     And I click on the login button
     Then I should be greeted with the following login message: "<message>"
 
-    @client:A
-    Examples:
-      | username    | password             | message                       |
-      | tomsmith    | SuperSecretPassword! | You logged into a secure area |
-      | invalidUser | SuperSecretPassword! | Your username is invalid!     |
-
-    @client:B
     Examples:
       | username | password             | message                       |
       | tomsmith | SuperSecretPassword! | You logged into a secure area |
-      | tomsmith | invalidPass          | Your password is invalid!     |
-      |          |                      | Your username is invalid!     |
+      | wrong    | wrong                | Your username is invalid!     |
+    # tests common for all clients
+
+    @client:A
+    Examples:
+      | username    | password             | message                   |
+      | invalidUser | SuperSecretPassword! | Your username is invalid! |
+
+    @client:B
+    Examples:
+      | username | password    | message                   |
+      | tomsmith | invalidPass | Your password is invalid! |
+      |          |             | Your username is invalid! |
 
   Scenario Outline: Basic Auth
     Given I am on the "/basic_auth" route with credentials "<username>" and "<password>"

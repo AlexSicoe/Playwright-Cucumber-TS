@@ -1,3 +1,4 @@
+@disable:video
 Feature: User Authentication tests
 
   Background:

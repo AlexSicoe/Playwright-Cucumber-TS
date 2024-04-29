@@ -1,3 +1,4 @@
+@disable:video
 Feature: The Internet Herokuapp Tests
 
   Background:

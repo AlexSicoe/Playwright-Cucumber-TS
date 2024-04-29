@@ -1,3 +1,4 @@
+@disable:video
 Feature: Add products to cart
 
   Background:
